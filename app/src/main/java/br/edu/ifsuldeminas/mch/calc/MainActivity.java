@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textViewResultado.setText(resultado.toString());
             } catch (Exception e) {
                 Log.e(TAG, "ERRO! Erro na expressão:" + expressao, e);
-                textViewResultado.setText("Erro");
+                textViewResultado.setText("Error");
             }
         }
     }
