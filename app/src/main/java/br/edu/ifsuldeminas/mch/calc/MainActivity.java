@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 resultado = calc.calculate();
                 textViewResultado.setText(resultado.toString());
             } catch (Exception e) {
-                Log.e(TAG, "ERRO! Erro na expressão: " + expressao, e);
+                Log.e(TAG, "ERRO! Erro na expressão:" + expressao, e);
                 textViewResultado.setText("Erro");
             }
         }
