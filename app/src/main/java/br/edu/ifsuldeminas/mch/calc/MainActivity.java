@@ -7,12 +7,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
+    // declarando variaveis
     private static final String TAG = "ifsuldeminas.mch.calc";
     private Button buttonIgual;
     private TextView textViewResultado;
@@ -26,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Double resultado = 0.0;
     private boolean operadorSelecionado = false;
 
+// on create é usado para iniciar uma atividade,
+// preparando o que vai ser mostrado na tela.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().hide();
 
         buttonVirgulaID = findViewById(R.id.buttonVirgulaID);
+        // declarando uma variavel e
+        // pagando o botão da tela da interface
         buttonVirgulaID.setOnClickListener(this);
+        //preparando o botão para o evento, ou seja,
+        // quando ele for clicado vai acontecer tal coisa.
 
         buttonPorcentoID = findViewById(R.id.buttonPorcentoID);
         buttonPorcentoID.setOnClickListener(this);
@@ -87,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonNoveID = findViewById(R.id.buttonNoveID);
         buttonNoveID.setOnClickListener(this);
 
-
+        // quando o devido botão for clicado irá aparecer na expressão
         buttonVirgulaID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -220,12 +229,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
-
     }
+
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.buttonIgualID) {
             String expressao = textViewUltimaExpressao.getText().toString();
+            // faz a conta
             try {
                 Calculable calc = new ExpressionBuilder(expressao).build();
                 resultado = calc.calculate();
@@ -233,7 +243,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (Exception e) {
                 Log.e(TAG, "ERRO! Erro na expressão:" + expressao, e);
                 textViewResultado.setText("Error");
+                return; // adicionado para interromper a execução do código caso ocorra um erro
             }
+            // adicionado para mostrar uma mensagem de sucesso após o cálculo
+            Toast.makeText(this, "Cálculo realizado com sucesso!", Toast.LENGTH_SHORT).show();
         }
     }
 }
